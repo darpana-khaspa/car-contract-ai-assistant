@@ -2,7 +2,7 @@ streamlit
 pdfplumber
 pytesseract
 pdf2image
-ollama
+openai
 fastapi
 uvicorn
 python-multipart

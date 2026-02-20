@@ -1,5 +1,7 @@
-import ollama
+from openai import OpenAI
+import os
 
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 def contract_chatbot(contract_text, user_query):
 
     contract_text = contract_text[:4000]
@@ -16,11 +18,12 @@ User question:
 Answer clearly and practically.
 """
 
-    response = ollama.chat(
-        model="llama2",
-        messages=[{"role": "user", "content": prompt}]
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=300
     )
 
-    return response["message"]["content"]
-
-  
+    return response.choices[0].message.content
