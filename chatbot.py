@@ -1,6 +1,9 @@
 import ollama
 
 def contract_chatbot(contract_text, user_query):
+
+    contract_text = contract_text[:4000]
+
     prompt = f"""
 You are a car lease advisor.
 
@@ -12,9 +15,12 @@ User question:
 
 Answer clearly and practically.
 """
+
     response = ollama.chat(
         model="llama2",
         messages=[{"role": "user", "content": prompt}]
     )
 
     return response["message"]["content"]
+
+  
